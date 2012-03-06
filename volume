@@ -62,15 +62,23 @@ notify-volume() {
 	notify-send -t 500 Volume: [$BAR]
 }
 
-if [ "$1" = "up" ]; then
-	amixer set Master,0 $(($(get-volume)+$VOLUME_STEP))% unmute > /dev/null
-	notify-volume
-elif [ "$1" = "down" ]; then
-	amixer set Master,0 $(($(get-volume)-$VOLUME_STEP))% unmute > /dev/null
-	notify-volume
-elif [ "$1" = "mute" ]; then
-	amixer set Master,0 0 mute > /dev/null
-	notify-volume
-else
-	echo "Usage: $0 [ up | down | mute ]"
-fi
+case $1 in
+	up)
+		amixer set Master,0 $(($(get-volume)+$VOLUME_STEP))% unmute > /dev/null
+		notify-volume
+		;;
+	down)
+		amixer set Master,0 $(($(get-volume)-$VOLUME_STEP))% unmute > /dev/null
+		notify-volume
+		;;
+	mute)
+		amixer set Master,0 0 mute > /dev/null
+		notify-volume
+		;;
+	get)
+		echo "Volume: $(get-volume)%"
+		;;
+	*)
+		echo "Usage: $0 [ up | down | mute | get ]"
+		;;
+esac
