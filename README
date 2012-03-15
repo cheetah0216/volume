@@ -4,7 +4,7 @@ Access and control your volume easily via Terminal or Hotkey.
 
 Usage
 -----
-$ volume [ up | down | mute ]
+$ volume [ up | down | mute | unmute]
 
 Configuration
 -------------
