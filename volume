@@ -64,6 +64,7 @@ notify-volume() {
 
 case $1 in
 	up)
+		echo $(get-volume)
 		amixer set Master,0 $(($(get-volume)+$VOLUME_STEP))% unmute > /dev/null
 		notify-volume
 		;;
@@ -72,13 +73,17 @@ case $1 in
 		notify-volume
 		;;
 	mute)
-		amixer set Master,0 0 mute > /dev/null
+		amixer set Master,0 0% unmute > /dev/null
+		notify-volume
+		;;
+	unmute)
+		amixer set Master,0 50% unmute > /dev/null
 		notify-volume
 		;;
 	get)
 		echo "Volume: $(get-volume)%"
 		;;
 	*)
-		echo "Usage: $0 [ up | down | mute | get ]"
+		echo "Usage: $0 [ up | down | mute | unmute | get ]"
 		;;
 esac
