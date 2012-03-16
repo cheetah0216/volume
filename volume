@@ -73,12 +73,10 @@ case $1 in
 		notify-volume
 		;;
 	mute)
-		amixer set Master,0 0% unmute > /dev/null
-		notify-volume
+		amixer set Master mute > /dev/null
 		;;
 	unmute)
-		amixer set Master,0 50% unmute > /dev/null
-		notify-volume
+		amixer set Master unmute > /dev/null
 		;;
 	get)
 		echo "Volume: $(get-volume)%"
